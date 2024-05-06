@@ -1,13 +1,21 @@
-import React from "react";
+import PropTypes from "prop-types";
 
-export default function ListStudent() {
+export default function ListStudent({
+  listStudent,
+  onClick,
+  showInfo,
+  deleteStudent,
+  editStudent,
+}) {
   return (
     <>
       {" "}
       <div>
         {" "}
         <div className="list">
-          <button className="list_btn--themmoi">Thêm mới sinh viên</button>
+          <button className="list_btn--themmoi" onClick={onClick}>
+            Thêm mới sinh viên
+          </button>
           <form>
             <input
               className="list_input--themmoi"
@@ -28,20 +36,45 @@ export default function ListStudent() {
             <th>Giới tính</th>
             <th>Hành động</th>
           </tr>
-          <tr>
-            <td>1</td>
-            <td>54654</td>
-            <td>Huỳnh Công Tính</td>
-            <td>26</td>
-            <td>Nam</td>
-            <td>
-              <button className="list_table--btn--xem">Xem</button>
-              <button className="list_table--btn--sua">Sửa</button>
-              <button className="list_table--btn--xoa">Xóa</button>
-            </td>
-          </tr>
+          {listStudent.map((student, index) => (
+            <tr key={student.studentId}>
+              <td>{index + 1}</td>
+              <td>{student.studentId}</td>
+              <td>{student.studentName}</td>
+              <td>{student.studentAge}</td>
+              <td>{student.studentGender}</td>
+              <td>
+                <button
+                  className="list_table--btn--xem"
+                  onClick={() => showInfo(student)}
+                >
+                  Xem
+                </button>
+                <button
+                  className="list_table--btn--sua"
+                  onClick={() => editStudent(student)}
+                >
+                  Sửa
+                </button>
+                <button
+                  className="list_table--btn--xoa"
+                  onClick={() => deleteStudent(student)}
+                >
+                  Xóa
+                </button>
+              </td>
+            </tr>
+          ))}
         </table>
       </div>
     </>
   );
 }
+
+ListStudent.propTypes = {
+  listStudent: PropTypes.array,
+  onClick: PropTypes.func,
+  showInfo: PropTypes.func,
+  deleteStudent: PropTypes.func,
+  editStudent: PropTypes.func,
+};
