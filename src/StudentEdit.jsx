@@ -1,11 +1,11 @@
-export default function StudentInformation({ handleSubmit }) {
+export default function StudentEdit({ handleEdit, studentId }) {
   return (
     <div>
       <h2>Thông Tin Sinh Viên</h2>
-      <form className="studentinfor_form" onSubmit={handleSubmit}>
+      <form className="studentinfor_form" onSubmit={handleEdit}>
         <div className="studentinfor_form--input">
           <label>Mã sinh viên</label>
-          <input type="text" disabled />
+          <input type="text" disabled value={studentId} />
         </div>
         <div className="studentinfor_form--input">
           <label>Tên sinh viên</label>
@@ -32,7 +32,7 @@ export default function StudentInformation({ handleSubmit }) {
           <input type="text" />
         </div>
         <button type="submit" className="studentinfor_form--btn--add">
-          ADD
+          Edit
         </button>
       </form>
     </div>
